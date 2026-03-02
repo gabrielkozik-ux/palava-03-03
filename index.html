@@ -380,6 +380,120 @@
                 transform: scale(0.85);
             }
         }
+
+        /* ===== MOBILE OPTIMALIZACE ===== */
+        @media (max-width: 640px) {
+            section {
+                padding: 1rem 0.75rem;
+                overflow-y: auto;
+                overflow-x: hidden;
+                scroll-snap-align: start;
+            }
+
+            .slide-content {
+                max-width: 100%;
+                transform: none !important;
+            }
+
+            /* Navigační tečky — menší a blíž k okraji */
+            .slide-dots {
+                right: 8px;
+                gap: 8px;
+            }
+
+            .slide-dot {
+                width: 7px;
+                height: 7px;
+            }
+
+            /* Counter menší */
+            .slide-counter {
+                bottom: 12px;
+                left: 12px;
+                font-size: 11px;
+            }
+
+            .slide-counter .current {
+                font-size: 16px;
+            }
+
+            /* Scroll hint — swipe ikona místo myši */
+            .scroll-hint-mouse {
+                width: 16px;
+                height: 28px;
+            }
+
+            /* Progress bar tenčí */
+            .progress-bar {
+                height: 3px;
+            }
+
+            /* Flip karty — auto výška */
+            .flip-card-wrapper {
+                height: 220px;
+            }
+
+            .flip-card .flip-front,
+            .flip-card .flip-back {
+                padding: 1.25rem;
+            }
+
+            /* Glass panely — menší padding */
+            .glass-panel {
+                padding: 1rem;
+            }
+
+            /* Pilíře touch toggle */
+            .pillar-touch-active .group-hover\:opacity-0 {
+                opacity: 0 !important;
+            }
+
+            .pillar-touch-active [class*="group-hover:opacity-100"] {
+                opacity: 1 !important;
+            }
+
+            /* Prompt karty horizontální scroll */
+            .prompt-scroll-mobile {
+                display: flex !important;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                gap: 12px;
+                padding-bottom: 8px;
+            }
+
+            .prompt-scroll-mobile>div {
+                min-width: 260px;
+                flex-shrink: 0;
+                scroll-snap-align: start;
+            }
+
+            .prompt-scroll-mobile::-webkit-scrollbar {
+                height: 4px;
+            }
+
+            .prompt-scroll-mobile::-webkit-scrollbar-thumb {
+                background: rgba(232, 119, 34, 0.4);
+                border-radius: 2px;
+            }
+
+            /* Background bloby menší */
+            .mobile-blob {
+                width: 12rem !important;
+                height: 12rem !important;
+            }
+        }
+
+        /* Malé telefony (iPhone SE apod.) */
+        @media (max-width: 380px) {
+            section {
+                padding: 0.75rem 0.5rem;
+            }
+
+            .flip-card-wrapper {
+                height: 180px;
+            }
+        }
     </style>
 </head>
 
@@ -388,11 +502,11 @@
     <!-- Globální dynamické pozadí -->
     <div class="fixed top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
         <div
-            class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-orange-600/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob">
+            class="absolute top-[-10%] left-[-10%] w-96 h-96 mobile-blob bg-orange-600/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob">
         </div>
-        <div class="absolute top-[20%] right-[-10%] w-96 h-96 bg-amber-500/15 rounded-full mix-blend-screen filter blur-[100px] animate-blob"
+        <div class="absolute top-[20%] right-[-10%] w-96 h-96 mobile-blob bg-amber-500/15 rounded-full mix-blend-screen filter blur-[100px] animate-blob"
             style="animation-delay: 2s;"></div>
-        <div class="absolute bottom-[-20%] left-[20%] w-96 h-96 bg-teal-700/15 rounded-full mix-blend-screen filter blur-[100px] animate-blob"
+        <div class="absolute bottom-[-20%] left-[20%] w-96 h-96 mobile-blob bg-teal-700/15 rounded-full mix-blend-screen filter blur-[100px] animate-blob"
             style="animation-delay: 4s;"></div>
     </div>
 
@@ -409,7 +523,8 @@
     <!-- Scroll hint -->
     <div class="scroll-hint" id="scroll-hint">
         <div class="scroll-hint-mouse"></div>
-        <span class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold">Scrollujte</span>
+        <span class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold hidden sm:block">Scrollujte</span>
+        <span class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold block sm:hidden">Swipněte ↓</span>
     </div>
 
     <div id="presentation-container">
@@ -418,7 +533,7 @@
         <section id="slide-1" class="is-visible">
             <div class="slide-content text-center">
                 <!-- Zrcadlo (Magic Mirror) -->
-                <div class="relative w-40 h-40 mx-auto mb-6 cursor-pointer group"
+                <div class="relative w-28 h-28 sm:w-40 sm:h-40 mx-auto mb-4 sm:mb-6 cursor-pointer group"
                     onclick="document.getElementById('boss-trap-card').classList.toggle('revealed');">
                     <div
                         class="absolute inset-0 bg-orange-500/20 rounded-full blur-xl group-hover:bg-orange-400/30 transition-colors">
@@ -437,21 +552,25 @@
                     </div>
                 </div>
 
-                <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tight">Pohled do zrcadla <br><span
-                        class="gradient-text">někdy bolí</span></h1>
-                <p class="text-2xl md:text-3xl text-slate-400 mb-8">Realita řízení firmy v roce 2026</p>
+                <h1 class="text-3xl sm:text-5xl md:text-7xl font-bold mb-3 sm:mb-4 tracking-tight">Pohled do zrcadla
+                    <br><span class="gradient-text">někdy bolí</span>
+                </h1>
+                <p class="text-lg sm:text-2xl md:text-3xl text-slate-400 mb-4 sm:mb-8">Realita řízení firmy v roce 2026
+                </p>
 
                 <!-- Karta Past šéfa odhalující se kliknutím zrcadla -->
                 <div id="boss-trap-card"
-                    class="bg-red-900/10 p-6 rounded-3xl border border-red-500/30 text-left max-w-3xl mx-auto shadow-[0_0_30px_rgba(239,68,68,0.1)] backdrop-blur-md">
-                    <h2 class="text-3xl font-bold text-red-500 mb-3 flex items-center gap-3">
-                        <i data-lucide="alert-triangle" class="w-8 h-8 animate-pulse"></i> Past šéfa
+                    class="bg-red-900/10 p-4 sm:p-6 rounded-3xl border border-red-500/30 text-left max-w-3xl mx-auto shadow-[0_0_30px_rgba(239,68,68,0.1)] backdrop-blur-md">
+                    <h2
+                        class="text-xl sm:text-3xl font-bold text-red-500 mb-2 sm:mb-3 flex items-center gap-2 sm:gap-3">
+                        <i data-lucide="alert-triangle" class="w-6 h-6 sm:w-8 sm:h-8 animate-pulse"></i> Past šéfa
                     </h2>
-                    <p class="text-2xl text-slate-300 leading-relaxed mb-3">Stav, kdy raději uděláte všechno sami,
+                    <p class="text-base sm:text-2xl text-slate-300 leading-relaxed mb-2 sm:mb-3">Stav, kdy raději
+                        uděláte všechno sami,
                         abyste
                         měli jistotu kvality a ušetřili čas vysvětlováním.</p>
                     <blockquote
-                        class="border-l-4 border-red-500 pl-4 italic text-xl text-slate-400 mt-4 bg-red-950/30 p-4 rounded-r-lg">
+                        class="border-l-4 border-red-500 pl-3 sm:pl-4 italic text-sm sm:text-xl text-slate-400 mt-3 sm:mt-4 bg-red-950/30 p-3 sm:p-4 rounded-r-lg">
                         "Místo strategického růstu se topíte v operativním chaosu."
                     </blockquote>
                 </div>
@@ -461,10 +580,10 @@
         <!-- Slide 2: Rozcestí (Flip Cards) -->
         <section id="slide-2">
             <div class="slide-content w-full max-w-6xl">
-                <h2 class="text-5xl md:text-6xl font-bold mb-12 text-center">Rozcestí:<br><span
+                <h2 class="text-3xl sm:text-5xl md:text-6xl font-bold mb-6 sm:mb-12 text-center">Rozcestí:<br><span
                         class="text-red-400">Hasič</span> vs. <span class="text-emerald-400">Architekt</span></h2>
 
-                <div class="grid md:grid-cols-2 gap-10 lg:gap-16 w-full">
+                <div class="grid grid-cols-2 gap-4 sm:gap-10 lg:gap-16 w-full">
 
                     <!-- Karta 1: Hasič -->
                     <div class="flip-card-wrapper"
@@ -474,10 +593,10 @@
                             <div
                                 class="flip-front bg-red-950/40 border border-red-500/30 items-center justify-center text-center shadow-[0_0_30px_rgba(239,68,68,0.15)] hover:border-red-400/60 transition-colors">
                                 <i data-lucide="flame" class="w-16 h-16 text-red-400 mb-4 animate-pulse"></i>
-                                <h3 class="text-3xl font-bold mb-2 text-white">Hasič požárů</h3>
+                                <h3 class="text-lg sm:text-3xl font-bold mb-1 sm:mb-2 text-white">Hasič požárů</h3>
                                 <p class="text-slate-400 font-light">(Operativa)</p>
                                 <span
-                                    class="mt-6 text-xs uppercase tracking-widest text-red-300 font-bold bg-red-500/20 px-4 py-2 rounded-full hidden sm:block">Klikněte
+                                    class="mt-3 sm:mt-6 text-[10px] sm:text-xs uppercase tracking-widest text-red-300 font-bold bg-red-500/20 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">Klikněte
                                     pro realitu</span>
                             </div>
                             <!-- Zadní strana -->
@@ -499,10 +618,10 @@
                             <div
                                 class="flip-front bg-emerald-950/40 border border-emerald-500/30 items-center justify-center text-center shadow-[0_0_30px_rgba(16,185,129,0.15)] hover:border-emerald-400/60 transition-colors">
                                 <i data-lucide="layout-template" class="w-16 h-16 text-emerald-400 mb-4"></i>
-                                <h3 class="text-3xl font-bold mb-2 text-white">Architekt systémů</h3>
+                                <h3 class="text-lg sm:text-3xl font-bold mb-1 sm:mb-2 text-white">Architekt systémů</h3>
                                 <p class="text-slate-400 font-light">(Strategie)</p>
                                 <span
-                                    class="mt-6 text-xs uppercase tracking-widest text-emerald-300 font-bold bg-emerald-500/20 px-4 py-2 rounded-full hidden sm:block">Klikněte
+                                    class="mt-3 sm:mt-6 text-[10px] sm:text-xs uppercase tracking-widest text-emerald-300 font-bold bg-emerald-500/20 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">Klikněte
                                     pro řešení</span>
                             </div>
                             <!-- Zadní strana -->
@@ -519,7 +638,9 @@
 
                 </div>
 
-                <p class="text-center text-2xl text-slate-400 mt-10 font-light max-w-3xl mx-auto italic">"Profesionál se
+                <p
+                    class="text-center text-base sm:text-2xl text-slate-400 mt-4 sm:mt-10 font-light max-w-3xl mx-auto italic">
+                    "Profesionál se
                     od amatéra liší tím, že nespoléhá na svou brutální sílu, ale na kvalitu svých nástrojů."</p>
                 </p>
             </div>
@@ -528,14 +649,15 @@
         <!-- Slide 3: Tři pilíře (Interaktivní HOVER Panely) -->
         <section id="slide-3">
             <div class="slide-content w-full max-w-6xl">
-                <h2 class="text-5xl md:text-6xl font-bold mb-4 text-center">Synergie tří pilířů</h2>
-                <p class="text-2xl text-slate-400 mb-12 text-center font-light">Anatomie firmy, která předběhne rok 2026
+                <h2 class="text-2xl sm:text-5xl md:text-6xl font-bold mb-3 sm:mb-4 text-center">Synergie tří pilířů</h2>
+                <p class="text-base sm:text-2xl text-slate-400 mb-6 sm:mb-12 text-center font-light">Anatomie firmy,
+                    která předběhne rok 2026
                 </p>
 
-                <div class="grid md:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8">
                     <!-- Motor -->
-                    <div
-                        class="glass-panel p-8 rounded-3xl border border-slate-700 hover:border-orange-500 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(232,119,34,0.2)] group cursor-default relative overflow-hidden">
+                    <div onclick="this.classList.toggle('pillar-touch-active')"
+                        class="glass-panel p-4 sm:p-8 rounded-3xl border border-slate-700 hover:border-orange-500 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(232,119,34,0.2)] group cursor-pointer relative overflow-hidden">
                         <div
                             class="absolute -right-10 -top-10 w-32 h-32 bg-orange-500/10 rounded-full blur-2xl group-hover:bg-orange-500/20 transition-colors">
                         </div>
@@ -560,8 +682,8 @@
                     </div>
 
                     <!-- Brzdy -->
-                    <div
-                        class="glass-panel p-8 rounded-3xl border border-slate-700 hover:border-emerald-500 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(16,185,129,0.2)] group cursor-default relative overflow-hidden">
+                    <div onclick="this.classList.toggle('pillar-touch-active')"
+                        class="glass-panel p-4 sm:p-8 rounded-3xl border border-slate-700 hover:border-emerald-500 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(16,185,129,0.2)] group cursor-pointer relative overflow-hidden">
                         <div
                             class="absolute -right-10 -top-10 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-colors">
                         </div>
@@ -585,8 +707,8 @@
                     </div>
 
                     <!-- Palivo -->
-                    <div
-                        class="glass-panel p-8 rounded-3xl border border-slate-700 hover:border-yellow-500 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(234,179,8,0.2)] group cursor-default relative overflow-hidden">
+                    <div onclick="this.classList.toggle('pillar-touch-active')"
+                        class="glass-panel p-4 sm:p-8 rounded-3xl border border-slate-700 hover:border-yellow-500 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(234,179,8,0.2)] group cursor-pointer relative overflow-hidden">
                         <div
                             class="absolute -right-10 -top-10 w-32 h-32 bg-yellow-500/10 rounded-full blur-2xl group-hover:bg-yellow-500/20 transition-colors">
                         </div>
@@ -618,8 +740,9 @@
                 <div
                     class="mb-4 inline-block bg-orange-500/10 text-orange-400 px-6 py-2 rounded-full text-lg font-bold tracking-widest uppercase border border-orange-500/30 shadow-[0_0_15px_rgba(232,119,34,0.2)]">
                     Aha moment #1</div>
-                <h2 class="text-5xl md:text-6xl font-black mb-8 tracking-tight">Mluvte s AI jako <span
-                        class="text-orange-400">Architekt</span></h2>
+                <h2 class="text-2xl sm:text-5xl md:text-6xl font-black mb-4 sm:mb-8 tracking-tight">Mluvte s AI jako
+                    <span class="text-orange-400">Architekt</span>
+                </h2>
 
                 <div class="grid md:grid-cols-12 gap-8 w-full max-w-6xl mx-auto">
                     <!-- Simulátor psaní promptu -->
@@ -802,12 +925,13 @@
         <!-- Slide 5: Shadow AI & Právo (Slider rizika) -->
         <section id="slide-5">
             <div class="slide-content w-full">
-                <div class="grid md:grid-cols-2 gap-12 items-center w-full max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-6 sm:gap-12 items-center w-full max-w-6xl mx-auto">
                     <div>
                         <div
-                            class="mb-4 inline-block bg-red-500/10 text-red-400 px-6 py-2 rounded-full text-lg font-bold tracking-widest uppercase border border-red-500/30">
+                            class="mb-4 inline-block bg-red-500/10 text-red-400 px-4 sm:px-6 py-2 rounded-full text-sm sm:text-lg font-bold tracking-widest uppercase border border-red-500/30">
                             Aha moment #2 & Právní kotva</div>
-                        <h2 class="text-5xl md:text-6xl font-black mb-6 tracking-tight">Stíny a Soudy</h2>
+                        <h2 class="text-2xl sm:text-5xl md:text-6xl font-black mb-4 sm:mb-6 tracking-tight">Stíny a
+                            Soudy</h2>
 
                         <div class="mb-8">
                             <h3 class="text-2xl font-bold text-slate-100 mb-3 flex items-center gap-3"><i
@@ -916,10 +1040,10 @@
                 <div
                     class="mb-4 inline-block bg-yellow-500/10 text-yellow-400 px-6 py-2 rounded-full text-lg font-bold tracking-widest uppercase border border-yellow-500/30">
                     Aha moment #3</div>
-                <h2 class="text-5xl md:text-6xl font-black mb-8 tracking-tight">Digitální <span
+                <h2 class="text-2xl sm:text-5xl md:text-6xl font-black mb-4 sm:mb-8 tracking-tight">Digitální <span
                         class="text-yellow-400">Diplomat</span></h2>
 
-                <div class="grid md:grid-cols-12 gap-8 w-full max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-12 gap-4 sm:gap-8 w-full max-w-6xl mx-auto">
 
                     <!-- Kampaň Random Coffee (4 sloupce) -->
                     <div
@@ -1068,22 +1192,25 @@
         <!-- Slide 7: Výzva -->
         <section id="slide-7">
             <div class="slide-content text-center">
-                <i data-lucide="rocket" class="w-16 h-16 mx-auto mb-4 text-orange-400"></i>
-                <h2 class="text-5xl md:text-7xl font-black mb-4 tracking-tight">Otevřte oči a <span
+                <i data-lucide="rocket" class="w-10 h-10 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4 text-orange-400"></i>
+                <h2 class="text-2xl sm:text-5xl md:text-7xl font-black mb-3 sm:mb-4 tracking-tight">Otevřte oči a <span
                         class="gradient-text">připoutejte se</span></h2>
-                <p class="text-2xl text-slate-400 mb-8 max-w-2xl mx-auto font-light">Nesnažte se změnit celou firmu
+                <p class="text-base sm:text-2xl text-slate-400 mb-4 sm:mb-8 max-w-2xl mx-auto font-light">Nesnažte se
+                    změnit celou firmu
                     zítra. Začněte jednou úsporou.</p>
 
                 <div
-                    class="glass-panel p-8 rounded-3xl max-w-5xl mx-auto border border-slate-700/50 shadow-2xl relative overflow-hidden">
+                    class="glass-panel p-4 sm:p-8 rounded-3xl max-w-5xl mx-auto border border-slate-700/50 shadow-2xl relative overflow-hidden">
                     <div class="absolute top-0 right-0 p-4 text-blue-500/10"><i data-lucide="sparkles"
                             class="w-32 h-32"></i></div>
 
-                    <h3 class="text-2xl font-bold text-white mb-2 relative z-10 flex items-center gap-3">
-                        <i data-lucide="gift" class="text-yellow-400 w-6 h-6"></i>
+                    <h3
+                        class="text-lg sm:text-2xl font-bold text-white mb-2 relative z-10 flex items-center gap-2 sm:gap-3">
+                        <i data-lucide="gift" class="text-yellow-400 w-5 h-5 sm:w-6 sm:h-6"></i>
                         5 promptů na start — váš dárek z této přednášky
                     </h3>
-                    <p class="text-slate-400 text-sm mb-6 font-light relative z-10">Klikněte na kartu pro zkopírování
+                    <p class="text-slate-400 text-xs sm:text-sm mb-4 sm:mb-6 font-light relative z-10">Klikněte na kartu
+                        pro zkopírování
                         promptu. Vložte do chatGPT, Claude nebo Gemini.</p>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 relative z-10" id="prompt-cards">
@@ -1322,6 +1449,46 @@
                 }, 2000);
             });
         }
+
+        // === MOBILE: Touch swipe navigace ===
+        let touchStartY = 0;
+        let touchEndY = 0;
+        const SWIPE_THRESHOLD = 50;
+
+        container.addEventListener('touchstart', (e) => {
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        container.addEventListener('touchend', (e) => {
+            touchEndY = e.changedTouches[0].screenY;
+            const diff = touchStartY - touchEndY;
+            if (Math.abs(diff) > SWIPE_THRESHOLD) {
+                if (diff > 0 && currentSlide < sections.length - 1) {
+                    // Swipe up — další slide
+                    currentSlide++;
+                    sections[currentSlide].scrollIntoView({ behavior: 'smooth' });
+                } else if (diff < 0 && currentSlide > 0) {
+                    // Swipe down — předchozí slide
+                    currentSlide--;
+                    sections[currentSlide].scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        }, { passive: true });
+
+        // === MOBILE: Horizontální scroll pro prompt karty ===
+        function setupMobilePromptCards() {
+            const promptCards = document.getElementById('prompt-cards');
+            if (window.innerWidth <= 640 && promptCards) {
+                promptCards.classList.add('prompt-scroll-mobile');
+            } else if (promptCards) {
+                promptCards.classList.remove('prompt-scroll-mobile');
+            }
+        }
+        setupMobilePromptCards();
+        window.addEventListener('resize', setupMobilePromptCards);
+
+        // === MOBILE: Méně konfeti na mobilu ===
+        const originalLaunchConfetti = launchConfetti;
     </script>
 </body>
 
