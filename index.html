@@ -62,16 +62,159 @@
             font-family: 'Inter', sans-serif;
         }
 
-        /* Dynamické částicové pozadí */
-        #bg-canvas {
+        /* Navigační tečky */
+        .slide-dots {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 0;
-            opacity: 0.4;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 60;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .slide-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(148, 163, 184, 0.3);
+            border: 1.5px solid rgba(148, 163, 184, 0.4);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .slide-dot:hover {
+            background: rgba(148, 163, 184, 0.6);
+            transform: scale(1.3);
+        }
+
+        .slide-dot.active {
+            background: #38bdf8;
+            border-color: #38bdf8;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+            transform: scale(1.4);
+        }
+
+        /* Slide counter */
+        .slide-counter {
+            position: fixed;
+            bottom: 28px;
+            left: 28px;
+            z-index: 60;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: rgba(148, 163, 184, 0.5);
+            display: flex;
+            align-items: baseline;
+            gap: 2px;
+        }
+
+        .slide-counter .current {
+            font-size: 24px;
+            color: #38bdf8;
+            transition: all 0.3s ease;
+        }
+
+        /* Scroll hint */
+        .scroll-hint {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 60;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            opacity: 0.5;
+            animation: hintPulse 2.5s ease-in-out infinite;
+            transition: opacity 0.5s ease;
+        }
+
+        .scroll-hint.hidden {
+            opacity: 0;
             pointer-events: none;
+        }
+
+        .scroll-hint-mouse {
+            width: 22px;
+            height: 36px;
+            border: 2px solid rgba(148, 163, 184, 0.5);
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .scroll-hint-mouse::after {
+            content: '';
+            width: 3px;
+            height: 8px;
+            background: rgba(56, 189, 248, 0.7);
+            border-radius: 2px;
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scrollWheel 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollWheel {
+            0% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(12px);
+            }
+        }
+
+        @keyframes hintPulse {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        /* Boss trap card — override stagger */
+        #boss-trap-card {
+            opacity: 0 !important;
+            transform: scale(0.9) translateY(16px) !important;
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out !important;
+        }
+
+        #boss-trap-card.revealed {
+            opacity: 1 !important;
+            transform: scale(1) translateY(0) !important;
+        }
+
+        /* Konfeti */
+        .confetti-piece {
+            position: fixed;
+            z-index: 100;
+            pointer-events: none;
+            animation: confettiFall 3s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(720deg);
+            }
         }
 
         #presentation-container {
@@ -223,6 +366,8 @@
         .flip-card {
             transition: transform 0.8s;
             transform-style: preserve-3d;
+            position: absolute;
+            inset: 0;
         }
 
         .flip-card.flipped {
@@ -241,7 +386,6 @@
 <body>
 
     <!-- Globální dynamické pozadí -->
-    <canvas id="bg-canvas"></canvas>
     <div class="fixed top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
         <div
             class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-purple-600/30 rounded-full mix-blend-screen filter blur-[100px] animate-blob">
@@ -254,6 +398,20 @@
 
     <div class="progress-bar" id="progress"></div>
 
+    <!-- Navigační tečky -->
+    <div class="slide-dots" id="slide-dots"></div>
+
+    <!-- Slide counter -->
+    <div class="slide-counter" id="slide-counter">
+        <span class="current">1</span><span> / 7</span>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="scroll-hint" id="scroll-hint">
+        <div class="scroll-hint-mouse"></div>
+        <span class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold">Scrollujte</span>
+    </div>
+
     <div id="presentation-container">
 
         <!-- Slide 1: Intro -->
@@ -261,13 +419,13 @@
             <div class="slide-content text-center">
                 <!-- Zrcadlo (Magic Mirror) -->
                 <div class="relative w-48 h-48 mx-auto mb-8 cursor-pointer group"
-                    onclick="document.getElementById('boss-trap-card').classList.toggle('opacity-0'); document.getElementById('boss-trap-card').classList.toggle('scale-90'); document.getElementById('boss-trap-card').classList.toggle('translate-y-4');">
+                    onclick="document.getElementById('boss-trap-card').classList.toggle('revealed');">
                     <div
                         class="absolute inset-0 bg-blue-500/20 rounded-full blur-xl group-hover:bg-blue-400/30 transition-colors">
                     </div>
                     <div
                         class="relative w-full h-full glass-panel rounded-full flex flex-col items-center justify-center border-2 border-slate-600 group-hover:border-blue-400 transition-all overflow-hidden duration-500 transform group-hover:scale-105">
-                        <i data-lucide="mirror"
+                        <i data-lucide="eye"
                             class="w-16 h-16 text-slate-300 group-hover:text-blue-300 transition-colors mb-2"></i>
                         <span
                             class="text-xs font-bold text-slate-400 group-hover:text-blue-300 uppercase tracking-widest leading-tight">Klikněte
@@ -286,7 +444,7 @@
 
                 <!-- Karta Past šéfa odhalující se kliknutím zrcadla -->
                 <div id="boss-trap-card"
-                    class="bg-red-900/10 p-8 rounded-3xl border border-red-500/30 text-left max-w-3xl mx-auto shadow-[0_0_30px_rgba(239,68,68,0.1)] opacity-0 scale-90 translate-y-4 transition-all duration-700 ease-out backdrop-blur-md">
+                    class="bg-red-900/10 p-8 rounded-3xl border border-red-500/30 text-left max-w-3xl mx-auto shadow-[0_0_30px_rgba(239,68,68,0.1)] backdrop-blur-md">
                     <h2 class="text-2xl font-bold text-red-500 mb-4 flex items-center gap-3">
                         <i data-lucide="alert-triangle" class="w-6 h-6 animate-pulse"></i> Past šéfa
                     </h2>
@@ -296,10 +454,6 @@
                         class="border-l-4 border-red-500 pl-4 italic text-slate-400 mt-6 bg-red-950/30 p-4 rounded-r-lg">
                         "Místo strategického růstu se topíte v operativním chaosu. Management žere čas, který nemáte."
                     </blockquote>
-                </div>
-
-                <div class="mt-12 animate-bounce opacity-50">
-                    <i data-lucide="chevron-down" class="w-8 h-8 mx-auto text-slate-500"></i>
                 </div>
             </div>
         </section>
@@ -1014,11 +1168,43 @@
         const container = document.getElementById('presentation-container');
         const sections = document.querySelectorAll('section');
         const progressBar = document.getElementById('progress');
+        const dotsContainer = document.getElementById('slide-dots');
+        const counterEl = document.getElementById('slide-counter');
+        const scrollHint = document.getElementById('scroll-hint');
 
-        // Logika pro Intersection Observer (detekce, který slide je vidět)
+        // === Generování navigačních teček ===
+        sections.forEach((section, i) => {
+            const dot = document.createElement('div');
+            dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+            dot.title = `Slide ${i + 1}`;
+            dot.addEventListener('click', () => {
+                sections[i].scrollIntoView({ behavior: 'smooth' });
+            });
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.slide-dot');
+
+        function updateUI(index) {
+            // Navigační tečky
+            dots.forEach((d, i) => {
+                d.classList.toggle('active', i === index);
+            });
+            // Counter
+            counterEl.querySelector('.current').textContent = index + 1;
+            // Scroll hint - skryj po prvním scrollu
+            if (index > 0) {
+                scrollHint.classList.add('hidden');
+            }
+        }
+
+        // === Intersection Observer ===
+        let typewriterTriggered = false;
+        let confettiTriggered = false;
+
         const observerOptions = {
             root: container,
-            threshold: 0.5 // Slide musí být vidět alespoň z 50%
+            threshold: 0.5
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -1026,13 +1212,26 @@
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
 
-                    // Aktualizace progress baru
                     const index = Array.from(sections).indexOf(entry.target);
                     const progress = ((index + 1) / sections.length) * 100;
                     progressBar.style.width = `${progress}%`;
-                } else {
-                    // Volitelně: odstranit třídu, pokud chceme aby se animace opakovala při návratu
-                    // entry.target.classList.remove('is-visible');
+
+                    currentSlide = index;
+                    updateUI(index);
+
+                    // Auto-play typewriter na Slide 4
+                    if (entry.target.id === 'slide-4' && !typewriterTriggered) {
+                        typewriterTriggered = true;
+                        setTimeout(() => {
+                            if (typeof runTypewriter === 'function') runTypewriter();
+                        }, 800);
+                    }
+
+                    // Konfeti na Slide 7
+                    if (entry.target.id === 'slide-7' && !confettiTriggered) {
+                        confettiTriggered = true;
+                        setTimeout(launchConfetti, 600);
+                    }
                 }
             });
         }, observerOptions);
@@ -1041,7 +1240,7 @@
             observer.observe(section);
         });
 
-        // Ovládání šipkami a mezerníkem
+        // === Ovládání šipkami a mezerníkem ===
         let currentSlide = 0;
 
         document.addEventListener('keydown', (e) => {
@@ -1065,8 +1264,28 @@
             let index = Math.round(container.scrollTop / window.innerHeight);
             if (index !== currentSlide && index >= 0 && index < sections.length) {
                 currentSlide = index;
+                updateUI(index);
             }
         });
+
+        // === Konfeti animace ===
+        function launchConfetti() {
+            const colors = ['#38bdf8', '#818cf8', '#c084fc', '#34d399', '#fbbf24', '#f87171'];
+            const shapes = ['■', '●', '▲', '★', '◆'];
+            for (let i = 0; i < 50; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                piece.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+                piece.style.left = Math.random() * 100 + 'vw';
+                piece.style.top = -20 + 'px';
+                piece.style.color = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.fontSize = (Math.random() * 16 + 8) + 'px';
+                piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                piece.style.animationDelay = Math.random() * 0.8 + 's';
+                document.body.appendChild(piece);
+                setTimeout(() => piece.remove(), 4000);
+            }
+        }
     </script>
 </body>
 
