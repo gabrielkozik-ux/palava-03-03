@@ -19,12 +19,11 @@
                         sans: ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        brand: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            900: '#0c4a6e',
+                        palava: {
+                            orange: '#E87722',
+                            gold: '#D4A050',
+                            dark: '#0F1A24',
+                            teal: '#1B3A4B',
                         }
                     },
                     animation: {
@@ -56,8 +55,7 @@
             padding: 0;
             height: 100%;
             overflow: hidden;
-            background-color: #020617;
-            /* Temnější slate-950 pro lepší kontrast s gradienty */
+            background-color: #0F1A24;
             color: #f8fafc;
             font-family: 'Inter', sans-serif;
         }
@@ -91,9 +89,9 @@
         }
 
         .slide-dot.active {
-            background: #38bdf8;
-            border-color: #38bdf8;
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+            background: #E87722;
+            border-color: #E87722;
+            box-shadow: 0 0 12px rgba(232, 119, 34, 0.5);
             transform: scale(1.4);
         }
 
@@ -115,7 +113,7 @@
 
         .slide-counter .current {
             font-size: 24px;
-            color: #38bdf8;
+            color: #E87722;
             transition: all 0.3s ease;
         }
 
@@ -152,7 +150,7 @@
             content: '';
             width: 3px;
             height: 8px;
-            background: rgba(56, 189, 248, 0.7);
+            background: rgba(232, 119, 34, 0.7);
             border-radius: 2px;
             position: absolute;
             top: 6px;
@@ -296,7 +294,7 @@
         }
 
         .gradient-text {
-            background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
+            background: linear-gradient(to right, #E87722, #D4A050, #E87722);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -312,10 +310,10 @@
 
         /* Glassmorphism utility */
         .glass-panel {
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(15, 26, 36, 0.7);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(232, 119, 34, 0.1);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
@@ -324,7 +322,7 @@
             top: 0;
             left: 0;
             height: 4px;
-            background: linear-gradient(to right, #38bdf8, #c084fc);
+            background: linear-gradient(to right, #E87722, #D4A050);
             z-index: 50;
             transition: width 0.3s ease;
         }
@@ -337,8 +335,8 @@
 
         .interactive-element:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px -10px rgba(56, 189, 248, 0.3);
-            border-color: rgba(56, 189, 248, 0.5);
+            box-shadow: 0 20px 40px -10px rgba(232, 119, 34, 0.3);
+            border-color: rgba(232, 119, 34, 0.5);
         }
 
         .flip-card-wrapper {
@@ -390,11 +388,11 @@
     <!-- Globální dynamické pozadí -->
     <div class="fixed top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
         <div
-            class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-purple-600/30 rounded-full mix-blend-screen filter blur-[100px] animate-blob">
+            class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-orange-600/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob">
         </div>
-        <div class="absolute top-[20%] right-[-10%] w-96 h-96 bg-blue-600/30 rounded-full mix-blend-screen filter blur-[100px] animate-blob"
+        <div class="absolute top-[20%] right-[-10%] w-96 h-96 bg-amber-500/15 rounded-full mix-blend-screen filter blur-[100px] animate-blob"
             style="animation-delay: 2s;"></div>
-        <div class="absolute bottom-[-20%] left-[20%] w-96 h-96 bg-emerald-600/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob"
+        <div class="absolute bottom-[-20%] left-[20%] w-96 h-96 bg-teal-700/15 rounded-full mix-blend-screen filter blur-[100px] animate-blob"
             style="animation-delay: 4s;"></div>
     </div>
 
@@ -420,41 +418,41 @@
         <section id="slide-1" class="is-visible">
             <div class="slide-content text-center">
                 <!-- Zrcadlo (Magic Mirror) -->
-                <div class="relative w-48 h-48 mx-auto mb-8 cursor-pointer group"
+                <div class="relative w-40 h-40 mx-auto mb-6 cursor-pointer group"
                     onclick="document.getElementById('boss-trap-card').classList.toggle('revealed');">
                     <div
-                        class="absolute inset-0 bg-blue-500/20 rounded-full blur-xl group-hover:bg-blue-400/30 transition-colors">
+                        class="absolute inset-0 bg-orange-500/20 rounded-full blur-xl group-hover:bg-orange-400/30 transition-colors">
                     </div>
                     <div
-                        class="relative w-full h-full glass-panel rounded-full flex flex-col items-center justify-center border-2 border-slate-600 group-hover:border-blue-400 transition-all overflow-hidden duration-500 transform group-hover:scale-105">
+                        class="relative w-full h-full glass-panel rounded-full flex flex-col items-center justify-center border-2 border-slate-600 group-hover:border-orange-400 transition-all overflow-hidden duration-500 transform group-hover:scale-105">
                         <i data-lucide="eye"
-                            class="w-16 h-16 text-slate-300 group-hover:text-blue-300 transition-colors mb-2"></i>
+                            class="w-14 h-14 text-slate-300 group-hover:text-orange-300 transition-colors mb-1"></i>
                         <span
-                            class="text-xs font-bold text-slate-400 group-hover:text-blue-300 uppercase tracking-widest leading-tight">Klikněte
+                            class="text-xs font-bold text-slate-400 group-hover:text-orange-300 uppercase tracking-widest leading-tight">Klikněte
                             pro<br>pohled<br>do zrcadla</span>
 
-                        <!-- Záblesk zrcadla -->
                         <div
                             class="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-tr from-transparent via-white/20 to-transparent transform -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-in-out">
                         </div>
                     </div>
                 </div>
 
-                <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight">Pohled do zrcadla <br><span
+                <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tight">Pohled do zrcadla <br><span
                         class="gradient-text">někdy bolí</span></h1>
-                <p class="text-xl md:text-3xl text-slate-400 mb-12">Realita řízení firmy v roce 2026</p>
+                <p class="text-2xl md:text-3xl text-slate-400 mb-8">Realita řízení firmy v roce 2026</p>
 
                 <!-- Karta Past šéfa odhalující se kliknutím zrcadla -->
                 <div id="boss-trap-card"
-                    class="bg-red-900/10 p-8 rounded-3xl border border-red-500/30 text-left max-w-3xl mx-auto shadow-[0_0_30px_rgba(239,68,68,0.1)] backdrop-blur-md">
-                    <h2 class="text-2xl font-bold text-red-500 mb-4 flex items-center gap-3">
-                        <i data-lucide="alert-triangle" class="w-6 h-6 animate-pulse"></i> Past šéfa
+                    class="bg-red-900/10 p-6 rounded-3xl border border-red-500/30 text-left max-w-3xl mx-auto shadow-[0_0_30px_rgba(239,68,68,0.1)] backdrop-blur-md">
+                    <h2 class="text-3xl font-bold text-red-500 mb-3 flex items-center gap-3">
+                        <i data-lucide="alert-triangle" class="w-8 h-8 animate-pulse"></i> Past šéfa
                     </h2>
-                    <p class="text-lg text-slate-300 leading-relaxed mb-4">Stav, kdy raději uděláte všechno sami, abyste
+                    <p class="text-2xl text-slate-300 leading-relaxed mb-3">Stav, kdy raději uděláte všechno sami,
+                        abyste
                         měli jistotu kvality a ušetřili čas vysvětlováním.</p>
                     <blockquote
-                        class="border-l-4 border-red-500 pl-4 italic text-slate-400 mt-6 bg-red-950/30 p-4 rounded-r-lg">
-                        "Místo strategického růstu se topíte v operativním chaosu. Management žere čas, který nemáte."
+                        class="border-l-4 border-red-500 pl-4 italic text-xl text-slate-400 mt-4 bg-red-950/30 p-4 rounded-r-lg">
+                        "Místo strategického růstu se topíte v operativním chaosu."
                     </blockquote>
                 </div>
             </div>
@@ -463,7 +461,7 @@
         <!-- Slide 2: Rozcestí (Flip Cards) -->
         <section id="slide-2">
             <div class="slide-content w-full max-w-6xl">
-                <h2 class="text-4xl md:text-5xl font-bold mb-16 text-center">Rozcestí:<br><span
+                <h2 class="text-5xl md:text-6xl font-bold mb-12 text-center">Rozcestí:<br><span
                         class="text-red-400">Hasič</span> vs. <span class="text-emerald-400">Architekt</span></h2>
 
                 <div class="grid md:grid-cols-2 gap-10 lg:gap-16 w-full">
@@ -521,40 +519,42 @@
 
                 </div>
 
-                <p class="text-center text-xl text-slate-400 mt-16 font-light max-w-3xl mx-auto italic">"Profesionál se
+                <p class="text-center text-2xl text-slate-400 mt-10 font-light max-w-3xl mx-auto italic">"Profesionál se
                     od amatéra liší tím, že nespoléhá na svou brutální sílu, ale na kvalitu svých nástrojů."</p>
+                </p>
             </div>
         </section>
 
         <!-- Slide 3: Tři pilíře (Interaktivní HOVER Panely) -->
         <section id="slide-3">
             <div class="slide-content w-full max-w-6xl">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-center">Synergie tří pilířů</h2>
-                <p class="text-xl text-slate-400 mb-16 text-center font-light">Anatomie firmy, která předběhne rok 2026
+                <h2 class="text-5xl md:text-6xl font-bold mb-4 text-center">Synergie tří pilířů</h2>
+                <p class="text-2xl text-slate-400 mb-12 text-center font-light">Anatomie firmy, která předběhne rok 2026
                 </p>
 
                 <div class="grid md:grid-cols-3 gap-8">
                     <!-- Motor -->
                     <div
-                        class="glass-panel p-8 rounded-3xl border border-slate-700 hover:border-blue-500 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(59,130,246,0.2)] group cursor-default relative overflow-hidden">
+                        class="glass-panel p-8 rounded-3xl border border-slate-700 hover:border-orange-500 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(232,119,34,0.2)] group cursor-default relative overflow-hidden">
                         <div
-                            class="absolute -right-10 -top-10 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl group-hover:bg-blue-500/20 transition-colors">
+                            class="absolute -right-10 -top-10 w-32 h-32 bg-orange-500/10 rounded-full blur-2xl group-hover:bg-orange-500/20 transition-colors">
                         </div>
                         <div
-                            class="w-16 h-16 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform">
-                            <i data-lucide="cpu" class="text-blue-400 w-8 h-8"></i>
+                            class="w-16 h-16 rounded-2xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform">
+                            <i data-lucide="cpu" class="text-orange-400 w-8 h-8"></i>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3 text-white">1. MOTOR</h3>
-                        <p class="text-blue-300 text-sm font-bold uppercase tracking-widest mb-4">AI = Rychlost</p>
+                        <h3 class="text-2xl font-bold mb-2 text-white">1. MOTOR</h3>
+                        <p class="text-orange-300 text-lg font-bold uppercase tracking-widest mb-3">AI = Rychlost</p>
 
                         <!-- Původní text -->
-                        <p class="text-slate-400 font-light group-hover:opacity-0 transition-opacity absolute">Váš
+                        <p class="text-slate-400 text-lg font-light group-hover:opacity-0 transition-opacity absolute">
+                            Váš
                             akcelerátor a výkonný otrok. Transformuje dny práce na sekundy.</p>
                         <!-- Skrytý text odhalen při najetí -->
                         <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            <p class="text-slate-200 text-sm leading-relaxed">
-                                Automatizace e-mailů, tvorba smluv na kliknutí, analýza trhu za minutu. Váš akcelerátor
-                                a dokonalý stážista 24/7. Neunaví se a nedělá překlepy.
+                            <p class="text-slate-200 text-base leading-relaxed">
+                                Automatizace e-mailů, tvorba smluv na kliknutí, analýza trhu za minutu. Váš dokonalný
+                                stážista 24/7.
                             </p>
                         </div>
                     </div>
@@ -569,17 +569,17 @@
                             class="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:-rotate-3 transition-transform">
                             <i data-lucide="scale" class="text-emerald-400 w-8 h-8"></i>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3 text-white">2. BRZDY</h3>
-                        <p class="text-emerald-300 text-sm font-bold uppercase tracking-widest mb-4">Právo = Jistota</p>
+                        <h3 class="text-2xl font-bold mb-2 text-white">2. BRZDY</h3>
+                        <p class="text-emerald-300 text-lg font-bold uppercase tracking-widest mb-3">Právo = Jistota</p>
 
                         <!-- Původní text -->
-                        <p class="text-slate-400 font-light group-hover:opacity-0 transition-opacity absolute">Záchranná
+                        <p class="text-slate-400 text-lg font-light group-hover:opacity-0 transition-opacity absolute">
+                            Záchranná
                             brzda a bezpečnostní pásy. Dovolují jet rychle bez nárůstu rizika.</p>
-                        <!-- Skrytý text odhalen při najetí -->
                         <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            <p class="text-slate-200 text-sm leading-relaxed">
-                                Ochrana know-how od AI korporací, NDA podmínky do pracovních smluv a bezpečné sdílení
-                                dat. Právo tu není k byrokracii, ale k záchraně kůže.
+                            <p class="text-slate-200 text-base leading-relaxed">
+                                Ochrana know-how, NDA podmínky do smluv a bezpečné sdílení dat. Právo tu není k
+                                byrokracii, ale k záchraně kůže.
                             </p>
                         </div>
                     </div>
@@ -594,8 +594,8 @@
                             class="w-16 h-16 rounded-2xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform">
                             <i data-lucide="users" class="text-yellow-400 w-8 h-8"></i>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3 text-white">3. PALIVO</h3>
-                        <p class="text-yellow-300 text-sm font-bold uppercase tracking-widest mb-4">Lidé = Síť</p>
+                        <h3 class="text-2xl font-bold mb-2 text-white">3. PALIVO</h3>
+                        <p class="text-yellow-300 text-lg font-bold uppercase tracking-widest mb-3">Lidé = Síť</p>
 
                         <!-- Původní text -->
                         <p class="text-slate-400 font-light group-hover:opacity-0 transition-opacity absolute">Lidské
@@ -616,10 +616,10 @@
         <section id="slide-4">
             <div class="slide-content w-full">
                 <div
-                    class="mb-6 inline-block bg-blue-500/10 text-blue-400 px-6 py-2 rounded-full text-sm font-bold tracking-widest uppercase border border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.2)]">
+                    class="mb-4 inline-block bg-orange-500/10 text-orange-400 px-6 py-2 rounded-full text-lg font-bold tracking-widest uppercase border border-orange-500/30 shadow-[0_0_15px_rgba(232,119,34,0.2)]">
                     Aha moment #1</div>
-                <h2 class="text-4xl md:text-5xl font-black mb-12 tracking-tight">Mluvte s AI jako <span
-                        class="text-blue-400">Architekt</span></h2>
+                <h2 class="text-5xl md:text-6xl font-black mb-8 tracking-tight">Mluvte s AI jako <span
+                        class="text-orange-400">Architekt</span></h2>
 
                 <div class="grid md:grid-cols-12 gap-8 w-full max-w-6xl mx-auto">
                     <!-- Simulátor psaní promptu -->
@@ -805,24 +805,25 @@
                 <div class="grid md:grid-cols-2 gap-12 items-center w-full max-w-6xl mx-auto">
                     <div>
                         <div
-                            class="mb-6 inline-block bg-red-500/10 text-red-400 px-6 py-2 rounded-full text-sm font-bold tracking-widest uppercase border border-red-500/30">
+                            class="mb-4 inline-block bg-red-500/10 text-red-400 px-6 py-2 rounded-full text-lg font-bold tracking-widest uppercase border border-red-500/30">
                             Aha moment #2 & Právní kotva</div>
-                        <h2 class="text-5xl font-black mb-8 tracking-tight">Stíny a Soudy</h2>
+                        <h2 class="text-5xl md:text-6xl font-black mb-6 tracking-tight">Stíny a Soudy</h2>
 
-                        <div class="mb-10">
+                        <div class="mb-8">
                             <h3 class="text-2xl font-bold text-slate-100 mb-3 flex items-center gap-3"><i
-                                    data-lucide="ghost" class="text-slate-400 w-6 h-6"></i> Shadow AI</h3>
-                            <p class="text-slate-300 font-light leading-relaxed">Zaměstnanci už AI používají tajně.
-                                Nahrávají vaše smlouvy a know-how do bezplatných, veřejných verzí AI. Reálně tak <span
-                                    class="text-red-400 font-bold">trénují AI vaší konkurenci</span>.</p>
+                                    data-lucide="ghost" class="text-slate-400 w-7 h-7"></i> Shadow AI</h3>
+                            <p class="text-xl text-slate-300 font-light leading-relaxed">Zaměstnanci už AI používají
+                                tajně.
+                                Reálně tak <span class="text-red-400 font-bold">trénují AI vaší konkurenci</span>.</p>
                         </div>
 
                         <div>
                             <h3 class="text-2xl font-bold text-slate-100 mb-3 flex items-center gap-3"><i
-                                    data-lucide="scale" class="text-emerald-400 w-6 h-6"></i> Papír snese vše, soud ne
+                                    data-lucide="scale" class="text-emerald-400 w-7 h-7"></i> Papír snese vše, soud ne
                             </h3>
-                            <p class="text-slate-300 font-light leading-relaxed">Skvělý proces od AI je vám k ničemu,
-                                dokud nemá právní váhu. Musíte ho zlegalizovat (smlouva, vnitřní předpis).</p>
+                            <p class="text-xl text-slate-300 font-light leading-relaxed">Skvlý proces od AI je vám k
+                                ničemu,
+                                dokud nemá právní váhu.</p>
                         </div>
                     </div>
 
@@ -833,13 +834,13 @@
                             class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-emerald-600/10 rounded-full blur-[100px] transition-colors duration-300 pointer-events-none">
                         </div>
 
-                        <h3 class="text-xl font-bold text-white mb-8 z-10">Zkuste si test úniku dat</h3>
+                        <h3 class="text-2xl font-bold text-white mb-6 z-10">Zkuste si test úniku dat</h3>
 
-                        <div class="w-full relative z-10 mb-8 px-4">
+                        <div class="w-full relative z-10 mb-6 px-4">
                             <div
-                                class="flex justify-between text-xs text-slate-400 mb-2 font-bold uppercase tracking-widest">
+                                class="flex justify-between text-sm text-slate-400 mb-2 font-bold uppercase tracking-widest">
                                 <span class="text-emerald-400">Chráněno</span>
-                                <span class="text-red-400">Volný přístup (Realita)</span>
+                                <span class="text-red-400">Volný přístup</span>
                             </div>
                             <input type="range" min="0" max="100" value="0"
                                 class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500 transition-colors duration-300"
@@ -913,9 +914,9 @@
         <section id="slide-6">
             <div class="slide-content w-full">
                 <div
-                    class="mb-6 inline-block bg-yellow-500/10 text-yellow-400 px-6 py-2 rounded-full text-sm font-bold tracking-widest uppercase border border-yellow-500/30">
+                    class="mb-4 inline-block bg-yellow-500/10 text-yellow-400 px-6 py-2 rounded-full text-lg font-bold tracking-widest uppercase border border-yellow-500/30">
                     Aha moment #3</div>
-                <h2 class="text-5xl font-black mb-12 tracking-tight">Digitální <span
+                <h2 class="text-5xl md:text-6xl font-black mb-8 tracking-tight">Digitální <span
                         class="text-yellow-400">Diplomat</span></h2>
 
                 <div class="grid md:grid-cols-12 gap-8 w-full max-w-6xl mx-auto">
@@ -1067,10 +1068,10 @@
         <!-- Slide 7: Výzva -->
         <section id="slide-7">
             <div class="slide-content text-center">
-                <i data-lucide="rocket" class="w-16 h-16 mx-auto mb-6 text-blue-400"></i>
-                <h2 class="text-4xl md:text-6xl font-black mb-4 tracking-tight">Otevřte oči a <span
+                <i data-lucide="rocket" class="w-16 h-16 mx-auto mb-4 text-orange-400"></i>
+                <h2 class="text-5xl md:text-7xl font-black mb-4 tracking-tight">Otevřte oči a <span
                         class="gradient-text">připoutejte se</span></h2>
-                <p class="text-xl text-slate-400 mb-10 max-w-2xl mx-auto font-light">Nesnažte se změnit celou firmu
+                <p class="text-2xl text-slate-400 mb-8 max-w-2xl mx-auto font-light">Nesnažte se změnit celou firmu
                     zítra. Začněte jednou úsporou.</p>
 
                 <div
@@ -1094,7 +1095,7 @@
                                 <span class="text-sm font-bold text-blue-300 uppercase tracking-wider">Vylepšení
                                     e-mailu</span>
                             </div>
-                            <p class="text-xs text-slate-400 font-mono leading-relaxed prompt-text">Jsi expert na byznys
+                            <p class="text-sm text-slate-400 font-mono leading-relaxed prompt-text">Jsi expert na byznys
                                 komunikaci. Přepiš můj e-mail tak, aby byl profesionální, stručný a jasně formuloval co
                                 potřebuji. Zachovej fakta, odstraň emoce. Navrhni 2 varianty — formální a přátelskou.
                                 Můj e-mail: [VLOŽ TEXT]</p>
@@ -1111,7 +1112,7 @@
                                 <span class="text-sm font-bold text-emerald-300 uppercase tracking-wider">Interní
                                     směrnice</span>
                             </div>
-                            <p class="text-xs text-slate-400 font-mono leading-relaxed prompt-text">Jsi zkušený
+                            <p class="text-sm text-slate-400 font-mono leading-relaxed prompt-text">Jsi zkušený
                                 compliance manažer. Vytvoř interní směrnici pro [TÉMA, např. používání AI nástrojů ve
                                 firmě]. Struktura: účel, rozsah platnosti, pravidla, sankce, datum účinnosti. Jazyk má
                                 být srozumitelný i pro ne-právníky. Max 1 strana A4.</p>
@@ -1128,7 +1129,7 @@
                                 <span
                                     class="text-sm font-bold text-purple-300 uppercase tracking-wider">Brainstorming</span>
                             </div>
-                            <p class="text-xs text-slate-400 font-mono leading-relaxed prompt-text">Jsi kreativní
+                            <p class="text-sm text-slate-400 font-mono leading-relaxed prompt-text">Jsi kreativní
                                 stratég s 20 lety zkušeností. Potřebuji 10 neotřelých nápadů na [PROBLÉM/VÝZVA]. U
                                 každého nápadu uveď: název (max 5 slov), popis implementace (3 věty), odhadovaný dopad
                                 (nízký/střední/vysoký) a náklady na realizaci.</p>
@@ -1291,7 +1292,7 @@
 
         // === Konfeti animace ===
         function launchConfetti() {
-            const colors = ['#38bdf8', '#818cf8', '#c084fc', '#34d399', '#fbbf24', '#f87171'];
+            const colors = ['#E87722', '#D4A050', '#F59E0B', '#34d399', '#fbbf24', '#f97316'];
             const shapes = ['■', '●', '▲', '★', '◆'];
             for (let i = 0; i < 50; i++) {
                 const piece = document.createElement('div');
