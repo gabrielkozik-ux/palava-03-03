@@ -383,11 +383,19 @@
 
         /* ===== MOBILE OPTIMALIZACE ===== */
         @media (max-width: 640px) {
+            #presentation-container {
+                scroll-snap-type: y proximity;
+            }
+
             section {
                 padding: 1rem 0.75rem;
-                overflow-y: auto;
-                overflow-x: hidden;
+                min-height: 100vh;
+                height: auto;
+                overflow: visible;
                 scroll-snap-align: start;
+                justify-content: flex-start;
+                padding-top: 2rem;
+                padding-bottom: 3rem;
             }
 
             .slide-content {
@@ -397,24 +405,24 @@
 
             /* Navigační tečky — menší a blíž k okraji */
             .slide-dots {
-                right: 8px;
-                gap: 8px;
+                right: 6px;
+                gap: 6px;
             }
 
             .slide-dot {
-                width: 7px;
-                height: 7px;
+                width: 6px;
+                height: 6px;
             }
 
             /* Counter menší */
             .slide-counter {
-                bottom: 12px;
-                left: 12px;
-                font-size: 11px;
+                bottom: 8px;
+                left: 8px;
+                font-size: 10px;
             }
 
             .slide-counter .current {
-                font-size: 16px;
+                font-size: 14px;
             }
 
             /* Scroll hint — swipe ikona místo myši */
@@ -428,22 +436,64 @@
                 height: 3px;
             }
 
-            /* Flip karty — auto výška */
-            .flip-card-wrapper {
-                height: 220px;
+            /* ---- Slide 2: Flip karty na mobilu = 1 sloupec, bez flippingu ---- */
+            #slide-2 .grid {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
             }
 
-            .flip-card .flip-front,
-            .flip-card .flip-back {
+            .flip-card-wrapper {
+                height: auto;
+                perspective: none;
+            }
+
+            .flip-card {
+                transform: none !important;
+                transform-style: flat;
+            }
+
+            .flip-card .flip-front {
+                position: relative;
+                border-radius: 1.25rem;
                 padding: 1.25rem;
             }
 
-            /* Glass panely — menší padding */
-            .glass-panel {
-                padding: 1rem;
+            .flip-card .flip-back {
+                position: relative;
+                border-radius: 1.25rem;
+                padding: 1.25rem;
+                transform: none;
+                margin-top: 0.5rem;
             }
 
-            /* Pilíře touch toggle */
+            .flip-card .flip-front i[data-lucide] {
+                width: 2rem;
+                height: 2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            /* ---- Slide 3: Pilíře ---- */
+            #slide-3 .grid {
+                gap: 0.75rem !important;
+            }
+
+            #slide-3 .glass-panel {
+                padding: 1rem !important;
+            }
+
+            /* Pilíře: na mobilu vždy ukazuj oba texty */
+            #slide-3 .group-hover\:opacity-0,
+            #slide-3 [class*="group-hover:opacity-0"] {
+                opacity: 1 !important;
+                position: relative !important;
+            }
+
+            #slide-3 .opacity-0.group-hover\:opacity-100,
+            #slide-3 [class*="group-hover:opacity-100"] {
+                opacity: 1 !important;
+            }
+
+            /* Pilíře touch toggle fallback */
             .pillar-touch-active .group-hover\:opacity-0 {
                 opacity: 0 !important;
             }
@@ -452,24 +502,109 @@
                 opacity: 1 !important;
             }
 
-            /* Prompt karty horizontální scroll */
+            /* ---- Slide 4: Terminál + Metodika stack ---- */
+            #slide-4 .grid {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+
+            #slide-4 .md\:col-span-7,
+            #slide-4 .md\:col-span-5 {
+                grid-column: span 1 !important;
+            }
+
+            #slide-4 .font-mono {
+                font-size: 0.75rem;
+                line-height: 1.4;
+            }
+
+            #slide-4 .min-h-\[250px\] {
+                min-height: 180px;
+            }
+
+            /* ---- Slide 5: Stíny a Soudy ---- */
+            #slide-5 .grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+
+            #slide-5 .glass-panel {
+                padding: 1.25rem !important;
+            }
+
+            #slide-5 .h-56 {
+                height: auto;
+                min-height: 10rem;
+            }
+
+            #slide-5 #risk-icon {
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+
+            /* ---- Slide 6: Diplomat ---- */
+            #slide-6 .grid {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+
+            #slide-6 .md\:col-span-4,
+            #slide-6 .md\:col-span-8 {
+                grid-column: span 1 !important;
+            }
+
+            #slide-6 .glass-panel {
+                padding: 1rem !important;
+            }
+
+            #slide-6 textarea {
+                font-size: 0.7rem;
+                max-height: 4rem;
+            }
+
+            #slide-6 #filter-btn {
+                font-size: 0.75rem;
+                padding: 0.5rem 1rem;
+            }
+
+            /* ---- Slide 7: Prompt karty ---- */
+            #slide-7 .glass-panel {
+                padding: 1rem !important;
+                overflow-x: hidden;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+
+            #slide-7 .glass-panel h3 {
+                font-size: 0.95rem !important;
+                flex-wrap: wrap;
+            }
+
+            #slide-7 .glass-panel>p {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                max-width: 100%;
+            }
+
             .prompt-scroll-mobile {
                 display: flex !important;
                 overflow-x: auto;
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
-                gap: 12px;
+                gap: 10px;
                 padding-bottom: 8px;
+                max-width: calc(100vw - 3rem);
             }
 
             .prompt-scroll-mobile>div {
-                min-width: 260px;
+                min-width: 240px;
+                max-width: 280px;
                 flex-shrink: 0;
                 scroll-snap-align: start;
             }
 
             .prompt-scroll-mobile::-webkit-scrollbar {
-                height: 4px;
+                height: 3px;
             }
 
             .prompt-scroll-mobile::-webkit-scrollbar-thumb {
@@ -477,21 +612,65 @@
                 border-radius: 2px;
             }
 
+            /* Prompt texty menší */
+            .prompt-card p {
+                font-size: 0.7rem !important;
+                line-height: 1.4 !important;
+            }
+
+            /* Copy hint vždy viditelný na mobilu */
+            .prompt-card span[class*="opacity-0"] {
+                opacity: 1 !important;
+            }
+
+            /* ---- Globální mobilní typografie ---- */
+            h1 {
+                font-size: 1.75rem !important;
+            }
+
+            h2 {
+                font-size: 1.5rem !important;
+            }
+
+            h3 {
+                font-size: 1.1rem !important;
+            }
+
+            /* Glass panely — menší padding */
+            .glass-panel {
+                padding: 0.875rem;
+            }
+
             /* Background bloby menší */
             .mobile-blob {
-                width: 12rem !important;
-                height: 12rem !important;
+                width: 10rem !important;
+                height: 10rem !important;
+            }
+
+            /* Footer menší */
+            #slide-7 .mt-12 {
+                margin-top: 1.5rem !important;
+                font-size: 0.65rem !important;
             }
         }
 
         /* Malé telefony (iPhone SE apod.) */
         @media (max-width: 380px) {
             section {
-                padding: 0.75rem 0.5rem;
+                padding: 0.5rem 0.5rem;
+                padding-top: 1.25rem;
             }
 
-            .flip-card-wrapper {
-                height: 180px;
+            h1 {
+                font-size: 1.4rem !important;
+            }
+
+            h2 {
+                font-size: 1.25rem !important;
+            }
+
+            .prompt-scroll-mobile>div {
+                min-width: 210px;
             }
         }
     </style>
@@ -1200,7 +1379,7 @@
                     zítra. Začněte jednou úsporou.</p>
 
                 <div
-                    class="glass-panel p-4 sm:p-8 rounded-3xl max-w-5xl mx-auto border border-slate-700/50 shadow-2xl relative overflow-hidden">
+                    class="glass-panel p-4 sm:p-8 rounded-3xl max-w-5xl mx-auto border border-slate-700/50 shadow-2xl relative">
                     <div class="absolute top-0 right-0 p-4 text-blue-500/10"><i data-lucide="sparkles"
                             class="w-32 h-32"></i></div>
 
