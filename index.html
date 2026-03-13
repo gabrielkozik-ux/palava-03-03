@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Realita řízení firmy v roce 2026 | Gabriel</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -1089,9 +1090,22 @@
                     <div class="absolute top-0 right-0 p-4 text-blue-500/10"><i data-lucide="sparkles" class="w-32 h-32"></i></div>
 
                     <h3 class="text-lg sm:text-2xl font-bold text-white mb-2 relative z-10 flex items-center gap-2 sm:gap-3">
-                        <i data-lucide="gift" class="text-yellow-400 w-5 h-5 sm:w-6 sm:h-6"></i> 5 promptů na start — váš dárek z této přednášky
-                    </h3>
-                    <p class="text-slate-400 text-xs sm:text-sm mb-4 sm:mb-6 font-light relative z-10">Klikněte na kartu pro zkopírování promptu. Vložte do chatGPT, Claude nebo Gemini.</p>
+    <i data-lucide="gift" class="text-yellow-400 w-5 h-5 sm:w-6 sm:h-6"></i> Váš startovací balíček
+</h3>
+<p class="text-slate-400 text-xs sm:text-sm mb-6 font-light relative z-10">Stáhněte si manuál a kliknutím na kartu si zkopírujte první prompty.</p>
+
+<div class="relative z-10 flex flex-col sm:flex-row items-center gap-4 mb-8 bg-slate-900/60 p-4 sm:p-5 rounded-2xl border border-emerald-500/30 hover:border-emerald-500/60 transition-colors shadow-[0_0_20px_rgba(16,185,129,0.1)]">
+    <div class="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center border border-emerald-500/30 shrink-0">
+        <i data-lucide="file-down" class="text-emerald-400 w-6 h-6"></i>
+    </div>
+    <div class="flex-grow text-center sm:text-left">
+        <h4 class="text-white font-bold text-sm sm:text-base">Jak mluvit s AI (KPZ příručka)</h4>
+        <p class="text-slate-400 text-xs mt-1">Kompletní 6stránkový manuál v PDF, jak z AI vytvořit stážistu s IQ 150.</p>
+    </div>
+    <a href="Jak_mluvit_s_AI_KPZ_prirucka.pdf" target="_blank" download class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-6 rounded-xl shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all transform hover:scale-105 flex items-center justify-center gap-2 text-sm w-full sm:w-auto">
+        <i data-lucide="download" class="w-4 h-4"></i> Stáhnout manuál
+    </a>
+</div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 relative z-10" id="prompt-cards">
                         <div class="prompt-card bg-blue-950/40 border border-blue-500/30 p-5 rounded-2xl cursor-pointer hover:border-blue-400 hover:-translate-y-1 transition-all duration-300 group" onclick="copyPrompt(this)">
@@ -1336,3 +1350,4 @@
     </script>
 </body>
 </html>
+
